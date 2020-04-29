@@ -1,0 +1,28 @@
+# vim: set sts=2 ts=8 sw=2 tw=99 et ft=python:
+import os
+
+if not "SM" in globals():
+	SM = Extension
+
+projectName = 'testactivator_fix'
+
+project = SM.HL2Project(builder, projectName + '.ext')
+project.sources += [
+  'extension.cpp',
+  '../../alliedmodders/sourcemod/public/smsdk_ext.cpp',
+  '../../alliedmodders/sourcemod/public/CDetour/detours.cpp',
+  '../../alliedmodders/sourcemod/public/asm/asm.c',
+  '../../alliedmodders/sourcemod/public/libudis86/decode.c',
+  '../../alliedmodders/sourcemod/public/libudis86/itab.c',
+  '../../alliedmodders/sourcemod/public/libudis86/syn-att.c',
+  '../../alliedmodders/sourcemod/public/libudis86/syn-intel.c',
+  '../../alliedmodders/sourcemod/public/libudis86/syn.c',
+  '../../alliedmodders/sourcemod/public/libudis86/udis86.c',
+]
+project.compiler.defines += ['HAVE_STRING_H'];
+
+for sdk_name in SM.sdks:
+  sdk = SM.sdks[sdk_name]
+  binary = SM.HL2Config(project, projectName + '.ext.' + sdk.ext, sdk)
+
+SM.extensions += builder.Add(project)
