@@ -31,10 +31,6 @@
 
 #include "extension.h"
 #include "CDetour/detours.h"
-//#include <sourcehook.h>
-#include "iplayerinfo.h"
-#include <server_class.h>
-#include <ispatialpartition.h>
 
 class CBaseEntity;
 struct variant_hax
